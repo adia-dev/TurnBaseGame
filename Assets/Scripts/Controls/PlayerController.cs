@@ -146,6 +146,7 @@ namespace TurnBaseGame.Controls
 
         void UpdateArrowSelection()
         {
+
             if (CurrentSkill == null) return;
 
             foreach (var monster in FindObjectsOfType<Monster>())
