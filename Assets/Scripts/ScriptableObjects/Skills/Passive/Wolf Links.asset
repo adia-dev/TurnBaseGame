@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6cbd4def42797f41a058756460a046b, type: 3}
+  m_Name: Wolf Links
+  m_EditorClassIdentifier: 
+  _name: Wolf Links
+  _description: Wolf Links
+  _skillIcon: {fileID: 0}
+  _skillType: 3
+  _skillTarget: 0
+  _skillAreaOfAttack: 0
+  _skillEffects: []
+  _atkMultiplier: 125
+  _healPercent: 25

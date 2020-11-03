@@ -1,0 +1,277 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b393c5c2ed1d9b044a7962985bc78f06, type: 3}
+  m_Name: Cerberus
+  m_EditorClassIdentifier: 
+  fastConfigIndex: 4
+  _name: Cerberus
+  _monsterInfos:
+  - _awakanedName: Volkanyu
+    Element: 1
+    _type: 0
+    _rarity: 2
+    _isAwakaned: 0
+    _skills:
+    - {fileID: 11400000, guid: 24570073304a08a42a2f4434ec07ac53, type: 2}
+    - {fileID: 11400000, guid: c8d4e962b73ed6c4895e255238ae458e, type: 2}
+    - {fileID: 11400000, guid: 7c7179fb336ac9949938a850e6cb5d6a, type: 2}
+    _passiveSkill: {fileID: 11400000, guid: 6800f1ca9a72c97428a2f415616a49e4, type: 2}
+    _statsEvolution:
+    - HP: 1978
+      ATK: 176
+      DEF: 98
+      SPD: 100
+    - HP: 2274
+      ATK: 202
+      DEF: 112
+      SPD: 100
+    - HP: 2615
+      ATK: 232
+      DEF: 128
+      SPD: 100
+    - HP: 3007
+      ATK: 266
+      DEF: 147
+      SPD: 100
+    - HP: 3458
+      ATK: 305
+      DEF: 169
+      SPD: 100
+    - HP: 3976
+      ATK: 350
+      DEF: 194
+      SPD: 100
+    - HP: 4572
+      ATK: 402
+      DEF: 223
+      SPD: 100
+    - HP: 5257
+      ATK: 462
+      DEF: 256
+      SPD: 100
+    - HP: 6045
+      ATK: 531
+      DEF: 294
+      SPD: 100
+    - HP: 6951
+      ATK: 610
+      DEF: 338
+      SPD: 100
+    ElementMaterial: {fileID: 2100000, guid: 08e8e51c475cae74d8249ea683c72b9a, type: 2}
+  - _awakanedName: Leafyu
+    Element: 0
+    _type: 0
+    _rarity: 2
+    _isAwakaned: 0
+    _skills:
+    - {fileID: 11400000, guid: 0bd2ae7f0f0ba7d4b8b19079c98ed4f0, type: 2}
+    - {fileID: 11400000, guid: 0daeb86f6118fb041bafde4bbaaa766a, type: 2}
+    - {fileID: 11400000, guid: 7bc5665241aadf5468a83ef75a186e1f, type: 2}
+    _passiveSkill: {fileID: 11400000, guid: 201d15b185f157241a279bf692f45d20, type: 2}
+    _statsEvolution:
+    - HP: 1846
+      ATK: 184
+      DEF: 101
+      SPD: 104
+    - HP: 2122
+      ATK: 211
+      DEF: 116
+      SPD: 104
+    - HP: 2440
+      ATK: 242
+      DEF: 133
+      SPD: 104
+    - HP: 2805
+      ATK: 278
+      DEF: 152
+      SPD: 104
+    - HP: 3225
+      ATK: 319
+      DEF: 174
+      SPD: 104
+    - HP: 3708
+      ATK: 366
+      DEF: 200
+      SPD: 104
+    - HP: 4264
+      ATK: 420
+      DEF: 229
+      SPD: 104
+    - HP: 4903
+      ATK: 482
+      DEF: 263
+      SPD: 104
+    - HP: 5638
+      ATK: 554
+      DEF: 302
+      SPD: 104
+    - HP: 6483
+      ATK: 637
+      DEF: 347
+      SPD: 104
+    ElementMaterial: {fileID: 2100000, guid: 8f712298f6b6adc4091cc06784de2b20, type: 2}
+  - _awakanedName: Homnu
+    Element: 2
+    _type: 1
+    _rarity: 3
+    _isAwakaned: 0
+    _skills:
+    - {fileID: 11400000, guid: e30578bc6619cea458ec2ae7963d46d2, type: 2}
+    - {fileID: 11400000, guid: 14638a57178b9724fba04a97cb315257, type: 2}
+    - {fileID: 11400000, guid: 223e4f66149a38c4abc6c5e34de26642, type: 2}
+    _passiveSkill: {fileID: 11400000, guid: 6800f1ca9a72c97428a2f415616a49e4, type: 2}
+    _statsEvolution:
+    - HP: 2045
+      ATK: 134
+      DEF: 201
+      SPD: 110
+    - HP: 2351
+      ATK: 154
+      DEF: 231
+      SPD: 110
+    - HP: 2703
+      ATK: 177
+      DEF: 265
+      SPD: 110
+    - HP: 3108
+      ATK: 203
+      DEF: 304
+      SPD: 110
+    - HP: 3574
+      ATK: 233
+      DEF: 349
+      SPD: 110
+    - HP: 4110
+      ATK: 267
+      DEF: 401
+      SPD: 110
+    - HP: 4726
+      ATK: 307
+      DEF: 461
+      SPD: 110
+    - HP: 5434
+      ATK: 353
+      DEF: 530
+      SPD: 110
+    - HP: 6249
+      ATK: 405
+      DEF: 609
+      SPD: 110
+    - HP: 7186
+      ATK: 465
+      DEF: 700
+      SPD: 110
+    ElementMaterial: {fileID: 2100000, guid: b614f1c83bb6447409e3dc9c17e53418, type: 2}
+  - _awakanedName: Raikyu
+    Element: 3
+    _type: 0
+    _rarity: 3
+    _isAwakaned: 0
+    _skills:
+    - {fileID: 11400000, guid: 8c0377cbb094d9a41beb0bd52daae72f, type: 2}
+    - {fileID: 11400000, guid: 498cc8c98646e764a901fbf7181fa58b, type: 2}
+    - {fileID: 11400000, guid: e60e8e69e18f7f04380b73878ffe1e0f, type: 2}
+    _passiveSkill: {fileID: 11400000, guid: 201d15b185f157241a279bf692f45d20, type: 2}
+    _statsEvolution:
+    - HP: 2347
+      ATK: 245
+      DEF: 139
+      SPD: 115
+    - HP: 2699
+      ATK: 281
+      DEF: 159
+      SPD: 115
+    - HP: 3103
+      ATK: 323
+      DEF: 182
+      SPD: 115
+    - HP: 3568
+      ATK: 371
+      DEF: 209
+      SPD: 115
+    - HP: 4103
+      ATK: 426
+      DEF: 240
+      SPD: 115
+    - HP: 4718
+      ATK: 489
+      DEF: 275
+      SPD: 115
+    - HP: 5425
+      ATK: 562
+      DEF: 316
+      SPD: 115
+    - HP: 6238
+      ATK: 646
+      DEF: 363
+      SPD: 115
+    - HP: 7173
+      ATK: 742
+      DEF: 417
+      SPD: 115
+    - HP: 8248
+      ATK: 853
+      DEF: 479
+      SPD: 115
+    ElementMaterial: {fileID: 2100000, guid: d69c3093cb97311429cc43220593d683, type: 2}
+  - _awakanedName: Darkyu
+    Element: 4
+    _type: 0
+    _rarity: 3
+    _isAwakaned: 0
+    _skills:
+    - {fileID: 11400000, guid: 44d14be1f46a21e4c8376926eddb7015, type: 2}
+    - {fileID: 11400000, guid: 48a9fd0ee4760b04aaba64a439e60138, type: 2}
+    - {fileID: 11400000, guid: 7c7179fb336ac9949938a850e6cb5d6a, type: 2}
+    _passiveSkill: {fileID: 11400000, guid: 201d15b185f157241a279bf692f45d20, type: 2}
+    _statsEvolution:
+    - HP: 2364
+      ATK: 284
+      DEF: 121
+      SPD: 105
+    - HP: 2718
+      ATK: 326
+      DEF: 139
+      SPD: 105
+    - HP: 3125
+      ATK: 374
+      DEF: 159
+      SPD: 105
+    - HP: 3593
+      ATK: 430
+      DEF: 182
+      SPD: 105
+    - HP: 4131
+      ATK: 494
+      DEF: 209
+      SPD: 105
+    - HP: 4750
+      ATK: 568
+      DEF: 240
+      SPD: 105
+    - HP: 5462
+      ATK: 653
+      DEF: 275
+      SPD: 105
+    - HP: 6281
+      ATK: 750
+      DEF: 316
+      SPD: 105
+    - HP: 7223
+      ATK: 862
+      DEF: 363
+      SPD: 105
+    - HP: 8306
+      ATK: 991
+      DEF: 417
+      SPD: 105
+    ElementMaterial: {fileID: 2100000, guid: 5971555f13510264eb6930f387528ac5, type: 2}
