@@ -16,7 +16,7 @@ MonoBehaviour:
   _name: Cerberus
   _monsterInfos:
   - _awakanedName: Volkanyu
-    Element: 1
+    Element: 0
     _type: 0
     _rarity: 2
     _isAwakaned: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
       SPD: 100
     ElementMaterial: {fileID: 2100000, guid: 08e8e51c475cae74d8249ea683c72b9a, type: 2}
   - _awakanedName: Leafyu
-    Element: 0
+    Element: 1
     _type: 0
     _rarity: 2
     _isAwakaned: 0
@@ -237,41 +237,41 @@ MonoBehaviour:
     - HP: 2364
       ATK: 284
       DEF: 121
-      SPD: 105
+      SPD: 247
     - HP: 2718
       ATK: 326
       DEF: 139
-      SPD: 105
+      SPD: 247
     - HP: 3125
       ATK: 374
       DEF: 159
-      SPD: 105
+      SPD: 247
     - HP: 3593
       ATK: 430
       DEF: 182
-      SPD: 105
+      SPD: 247
     - HP: 4131
       ATK: 494
       DEF: 209
-      SPD: 105
+      SPD: 247
     - HP: 4750
       ATK: 568
       DEF: 240
-      SPD: 105
+      SPD: 247
     - HP: 5462
       ATK: 653
       DEF: 275
-      SPD: 105
+      SPD: 247
     - HP: 6281
       ATK: 750
       DEF: 316
-      SPD: 105
+      SPD: 247
     - HP: 7223
       ATK: 862
       DEF: 363
-      SPD: 105
+      SPD: 247
     - HP: 8306
       ATK: 991
       DEF: 417
-      SPD: 105
+      SPD: 247
     ElementMaterial: {fileID: 2100000, guid: 5971555f13510264eb6930f387528ac5, type: 2}

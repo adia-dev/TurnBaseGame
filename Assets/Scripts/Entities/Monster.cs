@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using TMPro;
+using TurnBaseGame.Combat;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace TurnBaseGame.Entity
@@ -20,6 +23,8 @@ namespace TurnBaseGame.Entity
 
         public GameObject SelectionArrow;
         public Image SelectionArrowUI;
+        public Image ElementUI;
+        public TextMeshProUGUI LevelUI;
         public MonsterInfo MonsterInfo { get; private set; }
         public Stats Stats { get; private set; }
 
@@ -38,8 +43,29 @@ namespace TurnBaseGame.Entity
                 MonsterInfo = _monsterFamily.GetMonsterInfo(_element);
                 GetComponent<MeshRenderer>().material = MonsterInfo.ElementMaterial;
                 Stats.InitializeStats(MonsterInfo.StatsEvolution[MonsterLevelArray]);
+                Stats.Level = _monsterLevel;
             }
 
+        }
+
+        public void UseSkill(Skill skill, List<Monster> targets)
+        {
+
+            if (targets.Count == 0) return;
+
+            foreach (var target in targets)
+            {
+                if (skill.SkillInfo.SkillType == SkillType.ATTACK)
+                {
+                    target.Stats.TakeDamage((int)(Stats.CurrentATK * 0 * skill.SkillInfo.AtkMultiplier));
+                }
+                else if (skill.SkillInfo.SkillType == SkillType.HEAL)
+                {
+                    target.Stats.Heal(skill.SkillInfo._healPercent);
+                }
+            }
+
+            Stats.ResetATB();
         }
 
         public ElementInfluence GetElementInfluence(Monster monster)

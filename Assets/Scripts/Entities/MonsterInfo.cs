@@ -9,7 +9,7 @@ namespace TurnBaseGame.Entity
     [System.Serializable]
     public enum Element
     {
-        Wind, Fire, Water, Light, Dark
+        Fire, Wind, Water, Light, Dark
     }
 
     [System.Serializable]

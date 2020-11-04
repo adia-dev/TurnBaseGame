@@ -50,14 +50,28 @@ namespace TurnBaseGame.Entity
         [ContextMenu("Set Stat Evolution Proportionnal")]
         public void ProportionalStatEvolution()
         {
-            for (int i = 1; i < _monsterInfos[fastConfigIndex].StatsEvolution.Length; i++)
+            //for (int i = 1; i < _monsterInfos[fastConfigIndex].StatsEvolution.Length; i++)
+            //{
+
+            //    _monsterInfos[fastConfigIndex].StatsEvolution[i].HP = (int)(_monsterInfos[fastConfigIndex].StatsEvolution[i - 1].HP * 1.15f);
+            //    _monsterInfos[fastConfigIndex].StatsEvolution[i].ATK = (int)(_monsterInfos[fastConfigIndex].StatsEvolution[i - 1].ATK * 1.15f);
+            //    _monsterInfos[fastConfigIndex].StatsEvolution[i].DEF = (int)(_monsterInfos[fastConfigIndex].StatsEvolution[i - 1].DEF * 1.15f);
+            //    _monsterInfos[fastConfigIndex].StatsEvolution[i].SPD = _monsterInfos[fastConfigIndex].StatsEvolution[0].SPD;
+            //}
+
+            for (int k = 0; k < _monsterInfos.Length; k++)
             {
 
-                _monsterInfos[fastConfigIndex].StatsEvolution[i].HP = (int)(_monsterInfos[fastConfigIndex].StatsEvolution[i - 1].HP * 1.15f);
-                _monsterInfos[fastConfigIndex].StatsEvolution[i].ATK = (int)(_monsterInfos[fastConfigIndex].StatsEvolution[i - 1].ATK * 1.15f);
-                _monsterInfos[fastConfigIndex].StatsEvolution[i].DEF = (int)(_monsterInfos[fastConfigIndex].StatsEvolution[i - 1].DEF * 1.15f);
-                _monsterInfos[fastConfigIndex].StatsEvolution[i].SPD = _monsterInfos[fastConfigIndex].StatsEvolution[0].SPD;
+                for (int i = 1; i < _monsterInfos[k].StatsEvolution.Length; i++)
+                {
+
+                    _monsterInfos[k].StatsEvolution[i].HP = (int)(_monsterInfos[0].StatsEvolution[i - 1].HP * 1.15f);
+                    _monsterInfos[k].StatsEvolution[i].ATK = (int)(_monsterInfos[0].StatsEvolution[i - 1].ATK * 1.15f);
+                    _monsterInfos[k].StatsEvolution[i].DEF = (int)(_monsterInfos[0].StatsEvolution[i - 1].DEF * 1.15f);
+                    _monsterInfos[k].StatsEvolution[i].SPD = _monsterInfos[0].StatsEvolution[0].SPD;
+                }
             }
+
         }
     }
 

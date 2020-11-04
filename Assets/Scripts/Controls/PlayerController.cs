@@ -8,24 +8,33 @@ using UnityEngine;
 namespace TurnBaseGame.Controls
 {
 
+    [System.Serializable]
+    public struct ElementColor
+    {
+        public Element Element;
+        public Color color;
+    }
+
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] Color _advantageColor = Color.green;
         [SerializeField] Color _balancedColor = Color.yellow;
         [SerializeField] Color _disadvantageColor = Color.red;
+        [SerializeField] ElementColor[] _elementColors;
 
         [SerializeField] public Monster[] _allieMonsters = new Monster[3];
         [SerializeField] public Monster[] _enemieMonsters;
         [SerializeField] public Monster _currentMonster;
         [SerializeField] public Skill[] _skills = new Skill[4];
         [SerializeField] public Skill CurrentSkill = null;
-
+        [SerializeField] GameObject turnIndicator;
 
         Camera _camera;
-        Fighter _fighter;
+        bool _monsterWithATBReady = false;
+
+
         Ray MouseRay => _camera.ScreenPointToRay(Input.mousePosition);
 
-        public event Action OnChangeCurrentMonster = delegate { };
         public void ChangeCurrentSkill()
         {
             Action changeCurrentSkill = OnChangeCurrentSkill;
@@ -35,6 +44,7 @@ namespace TurnBaseGame.Controls
             }
         }
         public event Action OnChangeCurrentSkill = delegate { };
+        public event Action OnTick = delegate { };
 
         void Awake()
         {
@@ -43,23 +53,31 @@ namespace TurnBaseGame.Controls
 
         void Start()
         {
-            _currentMonster = _allieMonsters[0];
-            _fighter = _currentMonster.GetComponent<Fighter>();
-            OnChangeCurrentMonster?.Invoke();
+            OnTick?.Invoke();
 
-            CurrentSkill = _skills[0];
-            OnChangeCurrentSkill?.Invoke();
+            foreach (var monster in FindObjectsOfType<Monster>())
+            {
+                foreach (var elementColor in _elementColors)
+                {
+                    if (monster.MonsterInfo.Element == elementColor.Element)
+                    {
+                        monster.ElementUI.color = elementColor.color;
+                        break;
+                    }
+                }
+                monster.LevelUI.text = monster.Stats.Level.ToString();
+            }
         }
 
         private void OnEnable()
         {
-            OnChangeCurrentMonster += InitializeSkills;
+            OnTick += SetCurrentMonster;
             OnChangeCurrentSkill += UpdateArrowSelection;
         }
 
         private void OnDisable()
         {
-            OnChangeCurrentMonster -= InitializeSkills;
+            OnTick -= SetCurrentMonster;
             OnChangeCurrentSkill -= UpdateArrowSelection;
         }
 
@@ -69,25 +87,43 @@ namespace TurnBaseGame.Controls
             for (int i = 0; i < _skills.Length; i++)
             {
                 _skills[i].SkillInfo = _currentMonster.MonsterInfo.TryGetSkills(i);
-                //_skills[i]._skillIcon.sprite = _currentMonster.MonsterInfo.TryGetSkills(i).SkillIcon;
+
             }
+            CurrentSkill = _skills[0];
+            OnChangeCurrentSkill?.Invoke();
         }
 
         void Update()
         {
-            MonsterTurn();
+            turnIndicator.transform.position = _currentMonster.transform.position + Vector3.up * 1.5f;
+
+            if (!_monsterWithATBReady)
+            {
+                foreach (var monster in FindObjectsOfType<Monster>())
+                {
+                    if (monster.Stats.CurrentATKBAR > 100)
+                    {
+                        _monsterWithATBReady = true;
+                        break;
+                    }
+                }
+
+                OnTick?.Invoke();
+                return;
+            }
+
+            HandlePlayerInteraction();
         }
 
-        void MonsterTurn()
+        void HandlePlayerInteraction()
         {
             if (Physics.Raycast(MouseRay, out RaycastHit hitInfo) && Input.GetMouseButtonDown(0))
             {
                 var monster = hitInfo.collider.GetComponent<Monster>();
 
-                if (monster == null || monster.Stats.IsDead) return;
+                if (monster == null) return;
 
                 InteractWithMonster(monster);
-
             }
         }
 
@@ -100,14 +136,18 @@ namespace TurnBaseGame.Controls
                 if (CurrentSkill.SkillInfo.SkillTarget == SkillTarget.ALLIE && _allieMonsters.Contains(monster))
                 {
                     targets.AddRange(_allieMonsters);
-                    _fighter.UseSkill(CurrentSkill, targets);
-                    IncrementAlly();
+                    _currentMonster.UseSkill(CurrentSkill, targets);
+
+                    OnTick?.Invoke();
+                    _monsterWithATBReady = false;
                 }
                 else if (CurrentSkill.SkillInfo.SkillTarget == SkillTarget.ENEMY && _enemieMonsters.Contains(monster))
                 {
                     targets.AddRange(_enemieMonsters);
-                    _fighter.UseSkill(CurrentSkill, targets);
-                    IncrementAlly();
+                    _currentMonster.UseSkill(CurrentSkill, targets);
+
+                    OnTick?.Invoke();
+                    _monsterWithATBReady = false;
                 }
             }
             else if (CurrentSkill.SkillInfo.SkillAreaOfAttack == SkillAreaOfAttack.MONOTARGET)
@@ -115,33 +155,37 @@ namespace TurnBaseGame.Controls
                 if (CurrentSkill.SkillInfo.SkillTarget == SkillTarget.ALLIE && _allieMonsters.Contains(monster))
                 {
                     targets.Add(monster);
-                    _fighter.UseSkill(CurrentSkill, targets);
-                    IncrementAlly();
+                    _currentMonster.UseSkill(CurrentSkill, targets);
+
+                    OnTick?.Invoke();
+                    _monsterWithATBReady = false;
                 }
                 else if (CurrentSkill.SkillInfo.SkillTarget == SkillTarget.ENEMY && _enemieMonsters.Contains(monster))
                 {
                     targets.Add(monster);
-                    _fighter.UseSkill(CurrentSkill, targets);
-                    IncrementAlly();
+                    _currentMonster.UseSkill(CurrentSkill, targets);
+
+                    OnTick?.Invoke();
+                    _monsterWithATBReady = false;
                 }
             }
 
         }
 
-        //Temp
-        int index = 0;
-        void IncrementAlly()
+        void SetCurrentMonster()
         {
-            index = (index + 1) % _allieMonsters.Length;
+            Dictionary<Monster, int> monsterAttackBar = new Dictionary<Monster, int>();
 
-            _currentMonster = _allieMonsters[index];
-            _fighter = _currentMonster.GetComponent<Fighter>();
-            OnChangeCurrentMonster?.Invoke();
+            foreach (var monster in FindObjectsOfType<Monster>())
+            {
+                monsterAttackBar.Add(monster, monster.Stats.CurrentATKBAR);
+            }
 
+            _currentMonster = monsterAttackBar.FirstOrDefault(m => m.Value == monsterAttackBar.Values.Max()).Key;
 
-            CurrentSkill = _skills[0];
-            OnChangeCurrentSkill?.Invoke();
+            InitializeSkills();
         }
+
 
 
         void UpdateArrowSelection()
@@ -198,7 +242,18 @@ namespace TurnBaseGame.Controls
             GUI.TextArea(new Rect(10, 10, 200, 25), CurrentSkill.SkillInfo.Name + (CurrentSkill.SkillInfo.SkillAreaOfAttack == SkillAreaOfAttack.MULTIPLE ? ": AOE" : ": Monotarget"));
             string effects = string.Empty;
 
-            Rect effectRect = new Rect(10, 45, 200, 0);
+            SkillTarget monsterType = SkillTarget.ALL;
+
+            if (_allieMonsters.Contains(_currentMonster))
+                monsterType = SkillTarget.ALLIE;
+            else if (_enemieMonsters.Contains(_currentMonster))
+                monsterType = SkillTarget.ENEMY;
+
+            GUI.TextArea(new Rect(10, 45, 200, 25), "Monster : " + _currentMonster.MonsterInfo.AwakanedName + " - " + monsterType.ToString());
+
+            GUI.TextArea(new Rect(10, 80, 200, 25), "ATB : " + _currentMonster.Stats.CurrentATKBAR.ToString());
+
+            Rect effectRect = new Rect(10, 115, 200, 0);
 
             if (CurrentSkill.SkillInfo.SkillEffects.Length == 0)
             {
@@ -216,6 +271,9 @@ namespace TurnBaseGame.Controls
             }
 
             GUI.TextArea(effectRect, effects);
+
+
+
         }
 
     }

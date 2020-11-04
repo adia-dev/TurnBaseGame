@@ -16,7 +16,7 @@ MonoBehaviour:
   _description: Beast Flash
   _skillIcon: {fileID: 0}
   _skillType: 0
-  _skillTarget: 0
+  _skillTarget: 1
   _skillAreaOfAttack: 0
   _skillEffects: []
   _atkMultiplier: 100

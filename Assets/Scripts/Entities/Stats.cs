@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TurnBaseGame.Controls;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,7 +22,7 @@ namespace TurnBaseGame.Entity
         #region STATS
         public bool IsDead => CurrentHP <= 0;
 
-        public int Level { get; private set; }
+        public int Level;/*{ get; private set; }*/
         public int MaxHP { get; private set; }
         public int CurrentHP { get; private set; }
 
@@ -45,6 +46,22 @@ namespace TurnBaseGame.Entity
         [SerializeField] Image _healthBar;
         [SerializeField] Image _attackBar;
         [SerializeField] float _fillSpeed = 1f;
+        PlayerController _playerController;
+
+        void Awake()
+        {
+            _playerController = FindObjectOfType<PlayerController>();
+        }
+
+        void OnEnable()
+        {
+            _playerController.OnTick += TickATB;
+        }
+
+        void OnDisable()
+        {
+            _playerController.OnTick -= TickATB;
+        }
 
         public void InitializeStats(StatsEvolution statsEvolution)
         {
@@ -78,7 +95,7 @@ namespace TurnBaseGame.Entity
         }
         public void UpdateATKBar()
         {
-            float targetAmount = (float)(CurrentATKBAR / 1f);
+            float targetAmount = (float)(CurrentATKBAR / 100f);
             StopAllCoroutines();
             StartCoroutine(FillBar(_attackBar, targetAmount));
         }
@@ -92,6 +109,14 @@ namespace TurnBaseGame.Entity
                 t += _fillSpeed * Time.deltaTime;
                 yield return null;
             }
+        }
+
+        public void ResetATB() => CurrentATKBAR = 0;
+
+        void TickATB()
+        {
+            CurrentATKBAR += (int)(CurrentSPD * 0.07f);
+            UpdateATKBar();
         }
 
     }

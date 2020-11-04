@@ -16,7 +16,7 @@ MonoBehaviour:
   _description: Don't you open up the window
   _skillIcon: {fileID: 0}
   _skillType: 4
-  _skillTarget: 1
+  _skillTarget: 0
   _skillAreaOfAttack: 1
   _skillEffects:
   - buff: 0
